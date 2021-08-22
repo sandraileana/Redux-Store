@@ -1,7 +1,6 @@
 {
   "name": "mern-shopping",
   "version": "1.0.0",
-  "description": "",
   "main": "server/server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -13,15 +12,21 @@
     "heroku-postbuild": "cd client && npm run build"
   },
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.4.0",
     "if-env": "^1.0.4",
-    "react-redux": "^7.2.1",
-    "redux": "^4.0.5"
+    "react-redux": "^7.2.1"
   },
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "redux-devtools": "^3.6.0"
-  }
+    "concurrently": "^5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jennifermulder/redux-shop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jennifermulder/redux-shop/issues"
+  },
+  "homepage": "https://github.com/jennifermulder/redux-shop#readme",
+  "description": ""
 }

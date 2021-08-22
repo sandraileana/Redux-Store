@@ -1,44 +1,47 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from 'react';
+import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/store/actions';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_CATEGORIES } from "../../utils/queries";
-import {UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY} from '../../utils/actions';
+// import { useStoreContext } from "../../utils/GlobalState";
 import { idbPromise } from '../../utils/helpers';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 
 function CategoryMenu() {
-
-  const state = useSelector((state) => {
-    return state
-  });
+  // const { data: categoryData } = useQuery(QUERY_CATEGORIES);
+  // const categories = categoryData?.categories || [];
   const dispatch = useDispatch();
-
+  //initialState from store => newState
+  const state = useSelector(state => state);
+  // immediately call, retrieve current state from global state object, .dispatch() method to update state
+  // const [state, dispatch] = useStoreContext();
+  //only need categories array out of global state, destructure to use in JSX
   const { categories } = state;
+  //query category data and store into global state object
+  //destrcuture loading variable; indicates waiting
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
-
+    //*** check if the useQuery() Hook's loading return value exists - pull from IndexedDB if not 
   useEffect(() => {
-    //if categoryData exists or has changed from the response of useQuery, then run dispatch()
-
-    if(categoryData) {
-      //execute our dispatch function with our action object indicating the type of action and the data to set our state for categories to
+    // if categoryData exists or has changed from the response of useQuery, then run dispatch()
+    if (categoryData) {
       dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories
       });
-
+      //save to idb store
       categoryData.categories.forEach(category => {
-        idbPromise('categories', 'put', category)
-      }) 
-    } else if (!loading) {
+        idbPromise('categories', 'put', category);
+      });
+    }
+    else if (!loading) {
       idbPromise('categories', 'get').then(categories => {
         dispatch({
           type: UPDATE_CATEGORIES,
           categories: categories
-        })
-      })
+        });
+      });
     }
   }, [categoryData, loading, dispatch]);
-
 
   const handleClick = id => {
     dispatch({
@@ -62,6 +65,27 @@ function CategoryMenu() {
       ))}
     </div>
   );
+
+//   //cart props
+// const mapStateToProps = (state /*, ownProps*/) => {
+//   return {
+//     cart: state.cart,
+//     cartOpen: state.cartOpen
+//   }
+// }
+// //cart props
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     updateCategories: cart => dispatch({
+//       type: UPDATE_CATEGORIES,
+//       products: [...cart]
+//     })
+//   }
+// }
 }
 
 export default CategoryMenu;
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(CategoryMenu)
