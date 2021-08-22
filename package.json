@@ -8,7 +8,7 @@
   },
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
@@ -22,6 +22,9 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "graphql": "^15.5.1"
+    "graphql": "^15.5.1",
+    "@apollo/react-components": "^4.0.0",
+    "@reduxjs/toolkit": "^1.6.1",
+    "redux": "^4.1.1"
+    }
   }
-}
