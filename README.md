@@ -54,10 +54,10 @@ After this the user will be able to:
 ## Screenshot
 
 1. Homepage
-![Homepage](https://github.com/sandraileana/Redux-Store/blob/main/client/public/images/Redux-store-homepage.jpg)
+![Homepage](https://github.com/sandraileana/Redux-Store/blob/main/client/public/images/Redux-store-homepage.png)
 
 2. Login
-![Login](https://github.com/sandraileana/Redux-Store/blob/main/client/public/images/Redux-store-signup.jpg)
+![Login](https://github.com/sandraileana/Redux-Store/blob/main/client/public/images/Redux-store-signup.png)
 
 
 ## Credits
